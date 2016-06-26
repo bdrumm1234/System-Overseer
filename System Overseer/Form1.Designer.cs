@@ -75,6 +75,15 @@
             this.ramUsageBar = new System.Windows.Forms.ProgressBar();
             this.ramInfoLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.gpuNameLabel = new System.Windows.Forms.Label();
+            this.gpuPanel = new System.Windows.Forms.Panel();
+            this.gpuMemoryLabelLabel = new System.Windows.Forms.Label();
+            this.gpuMemoryLabel = new System.Windows.Forms.Label();
+            this.gpuDriverLabelLabel = new System.Windows.Forms.Label();
+            this.gpuResolutionLabelLabel = new System.Windows.Forms.Label();
+            this.gpuNameLabelLabel = new System.Windows.Forms.Label();
+            this.gpuDriverLabel = new System.Windows.Forms.Label();
+            this.gpuResolutionLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.cpuPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -90,6 +99,7 @@
             this.cpuPanelUsage.SuspendLayout();
             this.panel1.SuspendLayout();
             this.ramUsagePanel.SuspendLayout();
+            this.gpuPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -99,7 +109,8 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(378, 24);
+            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.menuStrip1.Size = new System.Drawing.Size(379, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -114,7 +125,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -130,14 +141,14 @@
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(111, 22);
             this.helpToolStripMenuItem1.Text = "Help";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
             // creditsToolStripMenuItem
             // 
             this.creditsToolStripMenuItem.Name = "creditsToolStripMenuItem";
-            this.creditsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.creditsToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.creditsToolStripMenuItem.Text = "Credits";
             this.creditsToolStripMenuItem.Click += new System.EventHandler(this.creditsToolStripMenuItem_Click);
             // 
@@ -475,7 +486,7 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.ramUsagePanel);
             this.panel1.Controls.Add(this.ramInfoLabel);
-            this.panel1.Location = new System.Drawing.Point(7, 265);
+            this.panel1.Location = new System.Drawing.Point(7, 339);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(365, 73);
             this.panel1.TabIndex = 3;
@@ -519,18 +530,116 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(7, 339);
+            this.label1.Location = new System.Drawing.Point(7, 413);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(365, 17);
             this.label1.TabIndex = 4;
             this.label1.Text = "Note: RAM sizes may be slightly off due to utilisation by the BIOS.";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // gpuNameLabel
+            // 
+            this.gpuNameLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.gpuNameLabel.Location = new System.Drawing.Point(150, 3);
+            this.gpuNameLabel.Name = "gpuNameLabel";
+            this.gpuNameLabel.Size = new System.Drawing.Size(210, 15);
+            this.gpuNameLabel.TabIndex = 5;
+            this.gpuNameLabel.Text = "Unknown";
+            this.gpuNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // gpuPanel
+            // 
+            this.gpuPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.gpuPanel.Controls.Add(this.gpuMemoryLabelLabel);
+            this.gpuPanel.Controls.Add(this.gpuMemoryLabel);
+            this.gpuPanel.Controls.Add(this.gpuDriverLabelLabel);
+            this.gpuPanel.Controls.Add(this.gpuResolutionLabelLabel);
+            this.gpuPanel.Controls.Add(this.gpuNameLabelLabel);
+            this.gpuPanel.Controls.Add(this.gpuDriverLabel);
+            this.gpuPanel.Controls.Add(this.gpuResolutionLabel);
+            this.gpuPanel.Controls.Add(this.gpuNameLabel);
+            this.gpuPanel.Location = new System.Drawing.Point(7, 265);
+            this.gpuPanel.Name = "gpuPanel";
+            this.gpuPanel.Size = new System.Drawing.Size(365, 68);
+            this.gpuPanel.TabIndex = 6;
+            // 
+            // gpuMemoryLabelLabel
+            // 
+            this.gpuMemoryLabelLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.gpuMemoryLabelLabel.Location = new System.Drawing.Point(4, 48);
+            this.gpuMemoryLabelLabel.Name = "gpuMemoryLabelLabel";
+            this.gpuMemoryLabelLabel.Size = new System.Drawing.Size(148, 15);
+            this.gpuMemoryLabelLabel.TabIndex = 12;
+            this.gpuMemoryLabelLabel.Text = "Memory:";
+            this.gpuMemoryLabelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // gpuMemoryLabel
+            // 
+            this.gpuMemoryLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.gpuMemoryLabel.Location = new System.Drawing.Point(150, 46);
+            this.gpuMemoryLabel.Name = "gpuMemoryLabel";
+            this.gpuMemoryLabel.Size = new System.Drawing.Size(210, 18);
+            this.gpuMemoryLabel.TabIndex = 11;
+            this.gpuMemoryLabel.Text = "Unknown";
+            this.gpuMemoryLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // gpuDriverLabelLabel
+            // 
+            this.gpuDriverLabelLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.gpuDriverLabelLabel.Location = new System.Drawing.Point(4, 33);
+            this.gpuDriverLabelLabel.Name = "gpuDriverLabelLabel";
+            this.gpuDriverLabelLabel.Size = new System.Drawing.Size(148, 15);
+            this.gpuDriverLabelLabel.TabIndex = 10;
+            this.gpuDriverLabelLabel.Text = "Driver Version:";
+            this.gpuDriverLabelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // gpuResolutionLabelLabel
+            // 
+            this.gpuResolutionLabelLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.gpuResolutionLabelLabel.Location = new System.Drawing.Point(3, 18);
+            this.gpuResolutionLabelLabel.Name = "gpuResolutionLabelLabel";
+            this.gpuResolutionLabelLabel.Size = new System.Drawing.Size(149, 15);
+            this.gpuResolutionLabelLabel.TabIndex = 9;
+            this.gpuResolutionLabelLabel.Text = "Resolution:";
+            this.gpuResolutionLabelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.gpuResolutionLabelLabel.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // gpuNameLabelLabel
+            // 
+            this.gpuNameLabelLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.gpuNameLabelLabel.Location = new System.Drawing.Point(3, 3);
+            this.gpuNameLabelLabel.Name = "gpuNameLabelLabel";
+            this.gpuNameLabelLabel.Size = new System.Drawing.Size(149, 15);
+            this.gpuNameLabelLabel.TabIndex = 8;
+            this.gpuNameLabelLabel.Text = "Name:";
+            this.gpuNameLabelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // gpuDriverLabel
+            // 
+            this.gpuDriverLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.gpuDriverLabel.Location = new System.Drawing.Point(150, 31);
+            this.gpuDriverLabel.Name = "gpuDriverLabel";
+            this.gpuDriverLabel.Size = new System.Drawing.Size(210, 18);
+            this.gpuDriverLabel.TabIndex = 7;
+            this.gpuDriverLabel.Text = "Unknown";
+            this.gpuDriverLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // gpuResolutionLabel
+            // 
+            this.gpuResolutionLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.gpuResolutionLabel.Location = new System.Drawing.Point(150, 16);
+            this.gpuResolutionLabel.Name = "gpuResolutionLabel";
+            this.gpuResolutionLabel.Size = new System.Drawing.Size(210, 18);
+            this.gpuResolutionLabel.TabIndex = 6;
+            this.gpuResolutionLabel.Text = "Unknown";
+            this.gpuResolutionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // SystemOverseer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(378, 357);
+            this.ClientSize = new System.Drawing.Size(379, 432);
+            this.Controls.Add(this.gpuPanel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.cpuPanel);
@@ -558,6 +667,7 @@
             this.cpuPanelUsage.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ramUsagePanel.ResumeLayout(false);
+            this.gpuPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -612,6 +722,15 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel cpuCoreInfoPanel;
         private System.Windows.Forms.Label systemInfoLabel;
+        private System.Windows.Forms.Label gpuNameLabel;
+        private System.Windows.Forms.Panel gpuPanel;
+        private System.Windows.Forms.Label gpuResolutionLabel;
+        private System.Windows.Forms.Label gpuDriverLabel;
+        private System.Windows.Forms.Label gpuResolutionLabelLabel;
+        private System.Windows.Forms.Label gpuNameLabelLabel;
+        private System.Windows.Forms.Label gpuDriverLabelLabel;
+        private System.Windows.Forms.Label gpuMemoryLabel;
+        private System.Windows.Forms.Label gpuMemoryLabelLabel;
     }
 }
 

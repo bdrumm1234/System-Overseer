@@ -37,6 +37,20 @@ namespace System_Overseer
         {
             InitTimer();
 
+            string gpuName = getGPUName();
+
+            gpuName = gpuName
+            .Replace("(R)", "®")
+            .Replace("(C)", "©")
+            .Replace("(TM)", "™")
+            .Replace("(r)", "®")
+            .Replace("(c)", "©")
+            .Replace("(tm)", "™");
+
+            gpuNameLabel.Text = gpuName.Trim();
+            gpuResolutionLabel.Text = getGPUResolution();
+            gpuDriverLabel.Text = getGPUDriver();
+            gpuMemoryLabel.Text = getGPUMemory();
             coreCount = getCoreCount();
 
             ramUsageBar.Maximum = getRAMSize();
@@ -45,6 +59,7 @@ namespace System_Overseer
             string sysOS = getOS();
             string sysBit = "";
             string sysMachine = Environment.MachineName;
+
 
             if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432")))
             {
@@ -122,6 +137,67 @@ namespace System_Overseer
                 ramInfoLabel.Text = ramSize.Trim() + "MB of " + ramManufacturer.Trim() + " RAM @ " + ramRate + "MHz";
             }
 
+        }
+
+        public string getGPUName()
+        {
+            string gpuName = "";
+
+            ManagementObjectSearcher gpuQuery = new ManagementObjectSearcher("Select * FROM Win32_VideoController");
+
+            foreach (ManagementObject mObj in gpuQuery.Get())
+            {
+                gpuName = mObj["Name"].ToString();
+            }
+
+            return gpuName;
+        }
+
+        public string getGPUResolution()
+        {
+            int gpuHori = 0;
+            int gpuVert = 0;
+            int gpuRefr = 0;
+
+            ManagementObjectSearcher gpuQuery = new ManagementObjectSearcher("Select * FROM Win32_VideoController");
+
+            foreach (ManagementObject mObj in gpuQuery.Get())
+            {
+                gpuHori = Convert.ToInt32(mObj["CurrentHorizontalResolution"]);
+                gpuVert = Convert.ToInt32(mObj["CurrentVerticalResolution"]);
+                gpuRefr = Convert.ToInt32(mObj["CurrentRefreshRate"]);
+            }
+
+            return (gpuHori + " x " + gpuVert + " (" + gpuRefr + "Hz)");
+        }
+
+        public string getGPUDriver()
+        {
+            string gpuDriver = "";
+
+            ManagementObjectSearcher gpuQuery = new ManagementObjectSearcher("Select * FROM Win32_VideoController");
+
+            foreach (ManagementObject mObj in gpuQuery.Get())
+            {
+                gpuDriver = mObj["DriverVersion"].ToString();
+            }
+
+            return gpuDriver;
+        }
+
+        public string getGPUMemory()
+        {
+            uint gpuMemory = 0;
+
+            ManagementObjectSearcher gpuQuery = new ManagementObjectSearcher("Select * FROM Win32_VideoController");
+
+            foreach (ManagementObject mObj in gpuQuery.Get())
+            {
+                gpuMemory = Convert.ToUInt32(mObj["AdapterRAM"]);
+            }
+
+            gpuMemory = (gpuMemory / 1024) / 1024;
+            return gpuMemory + "MB Approx.";
         }
 
         public double getCPUUsage()
@@ -599,6 +675,11 @@ namespace System_Overseer
         {
             Help helpForm = new Help();
             helpForm.Show();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
